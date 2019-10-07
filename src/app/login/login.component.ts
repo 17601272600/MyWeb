@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppRouteModule } from '../app-route.module';
 import { LoginService } from './login.service';
-import { HttpClient } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-login',

@@ -8,13 +8,14 @@ import { AppRouteModule } from './app-route.module';
 import { LoginService } from './login/login.service';
 import { ContentsComponent } from './contents/contents.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,ContentsComponent
   ],
   imports: [
-    BrowserModule,FormsModule,AppRouteModule,HttpClientModule
+    CommonModule,BrowserModule,FormsModule,AppRouteModule,HttpClientModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

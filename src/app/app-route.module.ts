@@ -5,13 +5,14 @@ import { ContentsComponent } from './contents/contents.component';
 
 
 const routes: Routes = [
-  {path: '',redirectTo:'portal',pathMatch:'full'},   
+  {path: '',redirectTo:'product',pathMatch:'full'},   
   {path:'login',component:LoginComponent},//登录界面
-  {path:'portal',component:ContentsComponent}//目录页面
+  {path:'portal',component:ContentsComponent},//目录页面
+  {path:'product',loadChildren: "./product/product.module#ProductModule"}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRouteModule { }
