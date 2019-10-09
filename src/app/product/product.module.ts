@@ -8,9 +8,10 @@ import { CardComponent } from './card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductAlertsComponent } from './product-alerts.component';
 import { ShoppingComponent } from './shopping.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
 
-  imports: [CommonModule, HttpClientModule,
+  imports: [CommonModule, HttpClientModule,ReactiveFormsModule,
       
     RouterModule.forChild([
       { path: '',component: TopBarComponent,children:[
