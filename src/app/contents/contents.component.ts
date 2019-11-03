@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-contents',
   templateUrl: './contents.component.html'
 })
-export class ContentsComponent implements OnInit {
+export class ContentsComponent {
   value:string;
   value1:string;
   value2:string;
@@ -17,7 +17,6 @@ export class ContentsComponent implements OnInit {
     }
     alert(this.value1);
   }
-  ngOnInit() {
-  }
+
 
 }

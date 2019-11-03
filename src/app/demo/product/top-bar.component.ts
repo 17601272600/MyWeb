@@ -26,11 +26,6 @@ import { Component, OnInit } from '@angular/core';
       <router-outlet></router-outlet>
   `
 })
-export class TopBarComponent implements OnInit {
-
+export class TopBarComponent {
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

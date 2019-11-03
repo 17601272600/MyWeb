@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TopBarComponent } from './top-bar.component';
 import { RouterModule } from '@angular/router';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductListComponent } from './product-list.component';
 import { ProductDetailsComponent } from './product-detail.component';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './card.component';

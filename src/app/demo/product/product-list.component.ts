@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
-import { products } from '../procuct';
+import { products } from './procuct';
 
 @Component({
   selector: 'product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  template: `
+  <h2>Products</h2>
+   
+  <div *ngFor="let product of products; index as id">
+  
+    <h3>
+      <a [title]="product.name + ' details'" [routerLink]="['../', id]">
+        {{ product.name }}
+      </a>
+    </h3>
+  </div>`
 })
 export class ProductListComponent {
   products =products;
