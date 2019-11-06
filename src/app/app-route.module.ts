@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: '',redirectTo:'demo',pathMatch:'full'},   
   {path:'login',component:LoginComponent},//登录界面
   {path:'portal',component:ContentsComponent},//目录页面
-  {path:'demo() => import('./demo/demo.module').then(m => m.DemoModule)dule#DemoModule"}
+  {path:'demo',loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
 ];
 
 @NgModule({
