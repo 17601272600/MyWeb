@@ -6,8 +6,8 @@ import { RouterModule } from '@angular/router';
     
     RouterModule.forChild([
       { path: '', redirectTo:'hero' },
-      {path:'product',loadChildren: "./product/product.module#ProductModule"},
-      {path:'hero',loadChildren: "./hero/hero.module#HeroModule"},
+      {path:'product',loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
+      {path:'hero',loadChildren: () => import('./hero/hero.module').then(m => m.HeroModule)},
     ])
   ],
   declarations: []
