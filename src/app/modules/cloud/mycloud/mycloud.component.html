@@ -1,0 +1,28 @@
+<nz-layout>
+        <nz-header>
+          <nz-carousel [nzEffect]="scrollx" [nzAutoPlay]=true>
+            <div nz-carousel-content *ngFor="let index of images" align="center">
+               <img src="{{index}}"/>
+            </div>
+          </nz-carousel>
+        
+        </nz-header>
+        <nz-content>
+        <div style="width:160px">
+        
+        <button nz-button nzType="appstore" nzTheme="twotone" (click)="toggleCollapsed()">
+          <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </button>
+        <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+          <li nz-menu-item nz-tooltip nzPlacement="right" [nzTitle]="isCollapsed ? '我的联系题' : ''" nzSelected>
+            <i nz-icon nzType="mail"></i>
+            <span>我的联系题</span>
+          </li>
+        </ul>
+      </div>
+        </nz-content>
+        <nz-footer>
+          <div>本网站纯属本人自娱自乐,仅供个人使用。如需要账号,请加QQ570571457</div>
+        </nz-footer>
+    </nz-layout>
+    
