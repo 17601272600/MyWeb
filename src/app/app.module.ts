@@ -8,16 +8,21 @@ import { AppRouteModule } from './app-route.module';
 import { LoginService } from './login/login.service';
 import { ContentsComponent } from './contents/contents.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import zh from '@angular/common/locales/zh';
+
+registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,ContentsComponent
   ],
   imports: [
-    CommonModule,BrowserModule,FormsModule,AppRouteModule,HttpClientModule
+    CommonModule,BrowserModule,FormsModule,AppRouteModule,HttpClientModule, NgZorroAntdModule, BrowserAnimationsModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, { provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
