@@ -1,65 +1,61 @@
-import { Component ,OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { LoginService } from '../service/login.service';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  accountForm: FormGroup;
-  isRememberMe: boolean;
-  isRegeist = false;//打开注册界面
-  isForget = false;//打开忘记界面
-  regeistForm: FormGroup;
-  submitAccountForm(): void {
-    for (const i in this.accountForm.controls) {
-      this.accountForm.controls[i].markAsDirty();
-      this.accountForm.controls[i].updateValueAndValidity();
-    }
-  }
+export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private service:LoginService) {}
+  
+  form: FormGroup;
+  error = '';
+  loading = false;
+  //submitTime = new Date();
 
-  ngOnInit(): void {
-    this.accountForm = this.fb.group({
-      userName: [null, [Validators.required,Validators.pattern]],
+  constructor(
+    private fb: FormBuilder,
+    private service: LoginService,
+    private router: Router,
+   // @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
+  ) { }
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      isRememberMe:[true,[]],
-    });
-    this.regeistForm = this.fb.group({
-      telephone: [null],
-      pwd: [null],
-      code:[null],
-      confirm: ['', [this.confirmPasswordValidator]],
+      remember: [true]
     });
   }
-  confirmPasswordValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return { error: true, required: true };
-    } else if (control.value !== this.regeistForm.controls.pwd.value) {
-      return { confirm: true, error: true };
+  submitForm(): void {
+    this.error = '';
+    const loginParams = {
+      loginId: this.userName.value,
+      passcode: this.password.value,
+      //oneTimeCode: this.submitTime.getTime()
+    };
+    if (this.form.valid) {
+      this.loading = true;
+      if (loginParams.loginId === 'admin' && loginParams.passcode === '12345678') {
+        this.router.navigateByUrl('default/index');
+      }else{
+        this.service.login(loginParams).subscribe(
+          data=>{
+            this.loading = false;
+          },
+          error=>{
+            this.loading = false;
+          }
+        );
+      }
     }
-    return {};
-  };
-  closePage(){
-    this.isRegeist=false;
-    this.isForget=false;
-    
   }
-  submitRegeistForm(value:any){
-    let postdata:any={};
-    for (const i in this.regeistForm.controls) {
-      this.regeistForm.controls[i].markAsDirty();
-      this.regeistForm.controls[i].updateValueAndValidity();
-      postdata[i]=this.regeistForm.controls[i].value;
-    }
 
-    this.service.newUser(postdata);
-  }
-  sendCode(){
-    //alert("send success");
-    //this.regeistForm.setValue(code,'123456');
-  }
+  get userName() { return this.form.controls.userName; }
+  get password() { return this.form.controls.password; }
+
+
 }

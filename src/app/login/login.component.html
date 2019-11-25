@@ -1,125 +1,44 @@
-<div style="padding-left:70%;padding-top:10%;">
-    <nz-tabset>
-        <nz-tab nzTitle="账号登录">
-                <form nz-form [formGroup]="accountForm" class="login-form" (ngSubmit)="submitAccountForm()">
-                  <nz-form-item>
-                    <nz-form-control [nzErrorTip]="userErrorTpl">
-                      <nz-input-group nzPrefixIcon="user">
-                        <input type="text" nz-input formControlName="userName" placeholder="请输入当前手机号" required="true" pattern="^1[3456789]\d{9}$" maxlength="11"/>
-                      </nz-input-group>
-                    <ng-template #userErrorTpl let-control>
-                    <ng-container *ngIf="control.hasError('required')">
-                        请输入手机号！
-                    </ng-container>
-                    <ng-container *ngIf="control.hasError('pattern')">
-                        输入手机号不正确！！！
-                    </ng-container>
-                    </ng-template>
-                    </nz-form-control>
-                      </nz-form-item>
-                      <nz-form-item>
-                        <nz-form-control  [nzErrorTip]="passwordTip!">
-                        <nz-input-group nzPrefixIcon="lock">
-                            <input type="password" nz-input formControlName="password" placeholder="请输入密码" required pattern="^[0-9a-zA-z]{6,8}$"/>
-                        </nz-input-group>
-                        <ng-template #passwordTip let-control>
-                            <ng-container *ngIf="control.hasError('required')">
-                                请输入密码！
-                            </ng-container>
-                            <ng-container *ngIf="control.hasError('pattern')">
-                                密码为6-8位字符或数字！！！
-                            </ng-container>
-                            </ng-template>
-                        </nz-form-control>
-                      </nz-form-item>
-                      <nz-form-item>
-                        <nz-form-control>
-                          <label nz-checkbox formControlName="isRememberMe" ngDefaultControl >记住密码</label>
-                          <a class="login-form-forgot" class="login-form-forgot" (click)="isForget=true">忘记密码</a>
-                          <button nz-button class="login-form-button" [nzType]="'primary'">登录</button>
-                            <a (click)="isRegeist=true">注册</a>
+<div class="main-wrapper">
+    <div class="layout-passport">
+        <div class="layou-logo">
+        </div>
+        <h2 class="account-slogon-main">QT后台管理系统</h2>
+        <div class="accout-slogon">
+            <p>树深时见鹿，溪午不闻钟</p>
+        </div>
+        <div class="account-login">
+
+                <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm()">
+                        <nz-form-item>
+                          <nz-form-control>
+                            <nz-input-group [nzPrefix]="prefixUser">
+                              <input type="text" nz-input formControlName="userName" placeholder="admin">
+                            </nz-input-group>
+                            <nz-form-explain *ngIf="form.get('userName').dirty && form.get('userName').errors">请输入您的用户名！</nz-form-explain>
                           </nz-form-control>
-                      </nz-form-item>
-                
-                  </form>
-                  <nz-drawer  [nzClosable]="true" [nzVisible]="isRegeist||isForget" nzPlacement="right"  nzTitle="{{isRegeist?'注册账号':'修改密码'}}"  (nzOnClose)="closePage()" nzWidth='400px'>
-                      <form nz-form [formGroup]="regeistForm" (ngSubmit)="submitRegeistForm(regeistForm.value)">
-                          <nz-form-item>
-                            <nz-form-label [nzSpan]="7" nzRequired>手机号</nz-form-label>
-                            <nz-form-control [nzSpan]="12"  nzHasFeedback [nzErrorTip]="tel2Tpl">
-                              <input nz-input formControlName="telephone" placeholder="请输入手机号" maxlength="13" pattern="^1[3456789]\d{9}$" required/>
-                              <ng-template #tel2Tpl let-control>
-                                <ng-container *ngIf="control.hasError('required')">
-                                  请输入手机号!
-                                </ng-container>
-                                <ng-container *ngIf="control.hasError('pattern')">
-                                  当前手机号不正确!
-                                </ng-container>
-                              </ng-template>
-                            </nz-form-control>
-                          </nz-form-item>
-                          <nz-form-item>
-                              <nz-form-label [nzSpan]="7" nzRequired>验证码</nz-form-label>
-                              
-                              <nz-form-control [nzSpan]="12"  nzHasFeedback [nzErrorTip]="code2Tpl">
-                                <input nz-input formControlName="code" placeholder="请输入验证码"/>
-                                <button nz-button  nzType="default" (click)="$event.preventDefault();sendCode()">发送验证码</button>
-                                <ng-template #code2Tpl let-control>
-                                  <ng-container *ngIf="control.hasError('required')">
-                                    请输入验证码!
-                                  </ng-container>
-                                  <ng-container *ngIf="control.hasError('pattern')">
-                                    验证码为6位数字!
-                                  </ng-container>
-                                </ng-template>
-                              </nz-form-control>
-               
-                            </nz-form-item>
-                            
-                          <nz-form-item>
-                    
-                            <nz-form-label [nzSpan]="7" nzRequired>密码</nz-form-label>
-                            <div>
-                              <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="pwd2Tpl!">
-                                <input nz-input type="password" formControlName="pwd" placeholder="请输入密码" required pattern="^[0-9a-zA-z]{6,8}$" />
-                              </nz-form-control>
-                              <ng-template #pwd2Tpl let-control>
-                                  <ng-container *ngIf="control.hasError('required')">
-                                    请输入密码号!
-                                  </ng-container>
-                                  <ng-container *ngIf="control.hasError('pattern')">
-                                    密码为6-8位数字!
-                                  </ng-container>
-                                </ng-template>
-                            </div>
-                          </nz-form-item>
-                          <nz-form-item>
-                            <nz-form-label [nzSpan]="7" nzRequired>验证密码</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="pwd3Tpl">
-                              <input nz-input type="password" formControlName="confirm" placeholder="请再次密码！" />
-                              <ng-template #pwd3Tpl let-control>
-                                <ng-container *ngIf="control.hasError('required')">
-                                  请再次输入密码！
-                                </ng-container>
-                                <ng-container *ngIf="control.hasError('confirm')">
-                                    两次输入的密码不同！
-                                </ng-container>
-                              </ng-template>
-                            </nz-form-control>
-                          </nz-form-item>
-                 
-                          <nz-form-item>
-                            <nz-form-control [nzOffset]="7" [nzSpan]="12">
-                              <button nz-button nzType="primary" [disabled]="!regeistForm.valid">提交</button>
-                              <button nz-button (click)="$event.preventDefault();regeistForm.reset();">重置</button>
-                            </nz-form-control>
-                          </nz-form-item>
-                        </form>
-                </nz-drawer>
-        </nz-tab>
-        <nz-tab nzTitle="微信登录">
-                微信登录
-        </nz-tab>
-    </nz-tabset>
-    
-</div> 
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-control>
+                            <nz-input-group [nzPrefix]="prefixLock">
+                              <input type="password" nz-input formControlName="password" placeholder="12345678">
+                            </nz-input-group>
+                            <nz-form-explain *ngIf="form.get('password').dirty && form.get('password').errors">请输入您的密码！</nz-form-explain>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-control>
+                            <label nz-checkbox formControlName="remember">
+                              <span>记住密码</span>
+                            </label>
+                            <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
+                            <button nz-button class="login-form-button" [nzType]="'primary'" [nzLoading]="loading">{{loading?'登录中':'登录'}}</button>
+                            <a href="">现在注册</a>
+                          </nz-form-control>
+                        </nz-form-item>
+                      </form>
+                    <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+                      <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+              
+        </div>
+    </div>
+</div>

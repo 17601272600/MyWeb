@@ -1,41 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NZ_I18N, zh_CN } from 'ng-zorro-antd';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NZ_I18N, zh_CN, NZ_NOTIFICATION_CONFIG, NgZorroAntdModule } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IconsProviderModule } from './icons-provider.module';
+import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent,WelcomeComponent
+    AppComponent,LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule,FormsModule,
-   BrowserAnimationsModule,IconsProviderModule,NzTabsModule,NzFormModule,NzInputModule,NzButtonModule,NzIconModule,NzCheckboxModule,NzDrawerModule,NzLayoutModule,NzMenuModule
+    AppRoutingModule,
+    NgZorroAntdModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    //{ provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
+    { provide: NZ_NOTIFICATION_CONFIG, useValue: { nzMaxStack: 1 } },
+    { provide: NZ_I18N, useValue: zh_CN },
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

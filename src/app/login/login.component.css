@@ -1,8 +1,49 @@
-nz-tabset{
-    text-align:center;
-    width:20vw;
+.main-wrapper {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(to left, #0689fd 30%, #29bdd9 100%);
 }
 
+
+.layout-passport {
+    width: 430px;
+    height: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
+    background: #fff;
+   
+}
+.layout-passport  h2 {
+    text-align: center;
+}
+.layou-logo {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background: url("/assets/icons/icon.jpg") center no-repeat;
+    background-size: 100% 100%;
+    margin: 10px auto;
+}
+
+.accout-slogon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #595959;
+    font-size: 12px
+}
+
+.account-login {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
 
 .login-form {
     max-width: 300px;
@@ -14,8 +55,4 @@ nz-tabset{
 
   .login-form-button {
     width: 100%;
-  }
-
-  .ant-drawer-content-wrapper {
-    width:auto;
   }
