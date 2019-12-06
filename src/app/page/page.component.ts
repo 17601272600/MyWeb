@@ -8,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page.component.less']
 })
 export class PageComponent implements OnInit {
+  isCollapsed=false;
 
-  constructor() { }
-
-  ngOnInit() {
+  triggerTemplate = null;
+  date;
+  constructor(
+   // private api: ApiService
+  ) { }
+  launchSidebar() {
+    this.isCollapsed = !this.isCollapsed;
   }
-
+  ngOnInit() {
+    const date = new Date();
+    this.date = date.getFullYear();
+    //this.api.isConsole('NoConsole');
+  }
 }

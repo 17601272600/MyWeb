@@ -18,6 +18,7 @@ export class JsmindComponent implements OnInit {
   }
   
   get selectNode() { return this.jm.get_selected_node(); }
+  set selectNode(selectNode) { this.jm.set_selected_node()==selectNode; }
   ngOnInit() {
     this.loadJsMind();
 
@@ -150,5 +151,10 @@ reset(){
     ]
 };
 this.jm.data.load(mind)
+}
+updateText(){
+  this.isShowText=false;
+  this.jm.get_selected_node().data.text=this.text;
+
 }
 }
