@@ -1,0 +1,42 @@
+
+<input type="file" onchange="loadFile(this);"/>
+<button onclick="saveNodeTree();">保存</button>
+<button (click)="reset();">重置</button>
+<button onclick="savefile()">文件导出</button>
+
+<button *ngIf="!isPreview" (click)="previewChange()">预览</button>
+<button *ngIf="isPreview" (click)="previewChange()">退出预览</button>
+<div id="jsmind_container" oncontextmenu='return false'> </div>
+
+<div id="menu" class="skin">
+	<ul>
+	   <li (click)="addnote()">添加子节点</li>
+ 	   <li (click)="removeNote()">删除节点</li>
+	   <li (click)="editUrl()">编辑超链接</li>
+	   <li (click)="openText()">备注</li>
+ </ul>
+</div>
+<div id="previewmenu" class="skin">
+	<ul>
+			<li (click)="openUrl()">打开超链接</li>
+			<li (click)="openText()">备注</li>
+	</ul>
+</div>
+
+
+<nz-modal [(nzVisible)]="isAddLink" nzTitle="编写超链接" (nzOnCancel)="isAddLink=false" (nzOnOk)="addLink()">
+	<form>
+			<nz-form-item>
+					<nz-form-label [nzSm]="6" nzFor="pwd2" nzRequired>超链接</nz-form-label>
+					<nz-form-control [nzSm]="14"  nzErrorTip="请输入超链接！" >
+					  <input nz-input type="text" name="link" [(ngModel)]="url"/>
+					</nz-form-control>
+				  </nz-form-item>
+	</form>	
+	
+  </nz-modal>
+
+
+  <nz-modal [(nzVisible)]="isShowText" nzTitle="备注" (nzOnCancel)="isShowText=false" (nzOnOk)="updateText()">
+	<mkedit></mkedit>		
+</nz-modal>

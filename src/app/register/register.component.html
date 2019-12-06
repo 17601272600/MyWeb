@@ -1,0 +1,68 @@
+<h1 style="text-align: center;color:blue;padding-top:5%">欢迎注册QT的后台系统</h1>
+<nz-alert nzType="info" nzMessage="Info Text" nzCloseText="Close Now"></nz-alert>
+<form nz-form [formGroup]="regeistForm" style="padding-top:10%"  (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" nzRequired nzFor="name">昵称</nz-form-label>
+    <nz-form-control [nzSm]="14" nzErrorTip="请输入昵称!" >
+      <input nz-input formControlName="name"  maxlength=15/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" nzFor="pwd" nzRequired>密码</nz-form-label>
+    <nz-form-control [nzSm]="14" nzErrorTip="请输入密码！" >
+      <input nz-input type="password" formControlName="pwd" (ngModelChange)="updateConfirmValidator()" maxlength=10/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" nzFor="pwd2" nzRequired>确认密码</nz-form-label>
+    <nz-form-control [nzSm]="14"  [nzErrorTip]="errorTpl" >
+      <input nz-input type="password" formControlName="pwd2" maxlength=10/>
+      <ng-template #errorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          请再次输入密码!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('confirm')">
+          两次输入的密码不相同!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired nzFor="telephone" nzRequired>手机号</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzErrorTip]="telErr" >
+        <input nz-input formControlName="telephone"  maxlength=11 pattern="^1(3|4|5|7|8)\d{9}$"/>
+      </nz-form-control>
+      <ng-template #telErr let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            请再次联系方式!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('pattern')">
+            输入的手机号不正确!
+          </ng-container>
+        </ng-template>
+    </nz-form-item>
+    <nz-form-item nzType="flex">
+        <nz-form-label [nzSm]="6" nzRequired nzFor="code" nzRequired>验证码</nz-form-label>
+        <nz-form-control [nzSm]="12"  nzErrorTip="请输入验证码" >
+          <input nz-col  nz-input formControlName="code"  maxlength=6/>
+         
+      
+        </nz-form-control>
+        <div style="margin-top:4px"  nz-col  [nzXs]="{ span: 5,offset:1}">
+          
+          <button nz-button   nzType="primary" type="button" (click)="sendCode()" >{{codeText}}</button>
+        </div>
+      </nz-form-item>
+      <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" >
+          <div nz-col nzSpan="2" nzOffset=7>
+              
+          <button nz-button   nzType="primary" type="submit" >提交</button>
+
+          </div>
+          <div nz-col nzSpan="2" nzPull=6>              
+          <button nz-button   nzType="default" type="reset" >清空</button>
+
+          </div>
+        </div>
+      
+    </form>
