@@ -34,9 +34,10 @@
             ],
             "styles": [
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "src/styles.less"
+              "src/styles.less",
+              "src/assets/css/jsmind.css"
             ],
-            "scripts": []
+            "scripts": ["./src//assets/js/jsmind/jsmind.js"]
           },
           "configurations": {
             "production": {

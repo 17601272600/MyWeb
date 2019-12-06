@@ -10,12 +10,12 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MenuComponent } from './menu/menu.component';
+
 const routes: Routes = [
    {path:'',component:PageComponent,children:[
-     {path:'',component:IndexComponent}
+     {path:'',component:IndexComponent},
+     {path:'note',loadChildren:()=> import('../pages/note/note.module').then(m => m.NoteModule)}
    ]
-  
-  
   }
 ];
 @NgModule({

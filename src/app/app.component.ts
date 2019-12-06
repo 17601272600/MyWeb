@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NzConfigService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,8 @@ import { Component } from '@angular/core';
 }`]
 })
 export class AppComponent {
+  constructor(private readonly nzConfigService: NzConfigService){
+    //设置弹出框
+    nzConfigService.set("message",{"nzDuration":1000});
+  }
 }

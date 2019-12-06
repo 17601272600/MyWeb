@@ -6,6 +6,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
+  getCode(params: any) {
+    return this.http.get(environment.urlPrefix+'/portal/user/getCode', {params});
+    
+  }
   
   constructor(public http:HttpClient) { }
   login(params): Observable<any> {

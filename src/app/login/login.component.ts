@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.loading = true;
       if (loginParams.loginId === 'admin' && loginParams.passcode === '12345678') {
-        this.router.navigateByUrl('default/index');
+        this.router.navigateByUrl('default');
       }else{
         this.service.login(loginParams).subscribe(
           data=>{

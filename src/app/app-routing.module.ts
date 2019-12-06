@@ -4,9 +4,10 @@ import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'apps', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  {path:'default',loadChildren:()=> import('./page/page.module').then(m => m.PageModule)}
+  {path:'register',loadChildren:()=> import('./register/register.module').then(m => m.RegisterModule)},
+  {path:'apps',loadChildren:()=> import('./page/page.module').then(m => m.PageModule)}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
