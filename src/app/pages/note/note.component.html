@@ -1,0 +1,91 @@
+
+<div class="btn">
+    <button nz-button nzType="primary" (click)="openType(1)">新增分类</button>
+  </div>
+  <div class="tree">
+    <div class="menu">
+      <input type="text" nz-input placeholder="请输入筛选项" [(ngModel)]="searchValue"/>
+      <nz-tree
+      [nzData]="nodes"
+      (nzClick)="nzEvent($event)"
+      [nzTreeTemplate]="nzTreeTemplate">
+    </nz-tree>
+    <ng-template #nzTreeTemplate let-node>
+      <span class="custom-node" [class.active]="activedNode?.key === node.key">
+        <span *ngIf="!node.isLeaf" (contextmenu)="contextMenu($event, menu)">
+          <span class="folder-name">{{ node.title }}</span>
+        </span>
+        <span *ngIf="node.isLeaf" (contextmenu)="contextMenu($event, menu2)">
+          <i nz-icon nzType="file"></i>
+          <span class="file-name">{{ node.title }}</span>
+        </span>
+      </span>
+    </ng-template>
+
+  
+    </div>
+    <div style="width: 80%;height:100%" *ngIf="isType==0">
+      <div><span>类别名:{{typeTarget.name}}</span></div>
+      <div>介紹：<br>
+        {{typeTarget.desc}}
+      </div>
+    </div>
+    <div style="width: 80%;height:100%" *ngIf="isType==1">
+      <div><span>思维脑图:{{typeTarget.name}}</span></div>
+      <div><br>
+        <app-jsmind></app-jsmind>
+      </div>
+    </div>
+    <div style="width: 80%;height:100%" *ngIf="isType==2">
+      <div><label>笔记:</label>{{nodeTarget.name}} <button (click)="saveTextData()">保存</button>
+        
+
+      </div>
+      <div><br>
+       
+        <mark-down [(text)]="nodeTarget.text" [height]="markdownHeight"></mark-down>
+       <!-- <textarea style="width:80%;height:800px" [(ngModel)]="nodeTarget.text">
+
+        </textarea>-->
+        <!--<div class="detailmarkdown" id="detailmarkdown"  (onEditorChange)="syncModel($event)">
+          <textarea style="display:none;" >偶就來看回復的是</textarea>
+       </div>-->
+      </div>
+    </div>
+  </div>
+
+  
+  
+  <nz-modal [(nzVisible)]="isNewType" nzTitle="分类" (nzOnCancel)="isNewType=false" (nzOnOk)="typeOk()" >
+        <nz-input-group [nzSize]="'large'">
+                <div nz-row >
+                    <label>名称</label>  <input type="text" nz-input [(ngModel)]="typeTarget.name"/>
+                </div>
+               
+              </nz-input-group>
+              <nz-input-group [nzSize]="'large'">
+                  <div nz-row >
+                    <label>介绍</label>  <input type="text" nz-input [(ngModel)]="typeTarget.desc"/>
+                </div>
+            </nz-input-group>
+           
+  </nz-modal>  
+
+
+
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item>编辑</li>
+      <li nz-menu-item>删除</li>
+      <li nz-menu-item>添加文件</li>
+    </ul>
+  </nz-dropdown-menu>
+
+  <nz-dropdown-menu #menu2="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item>编辑</li>
+      <li nz-menu-item>删除</li>
+      <li nz-menu-item>预览</li>
+    </ul>
+  </nz-dropdown-menu>
+  

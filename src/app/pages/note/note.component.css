@@ -1,0 +1,82 @@
+.tree {
+    padding: 20px;
+    display: flex;
+  }
+  
+  .btn {
+    padding: 20px 20px 0 20px;
+  
+    [nz-button] {
+      margin-right: 20px;
+    }
+  }
+  
+  .menu {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    width: 20%;
+    height: 70vh;
+    font-size: 16px;
+  
+    input {
+      width: 90%;
+      margin: 20px;
+    }
+  }
+  
+  .tree-table {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    width: 95%;
+    height: 100%;
+    margin: 0 0 20px 50px;
+    padding: 20px;
+    font-size: 16px;
+  }
+  
+  .tree-btn {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    width: 95%;
+    height: 300px;
+    margin-left: 50px;
+    padding: 20px;
+    font-size: 16px;
+  }
+
+
+  :host ::ng-deep .ant-tree {
+    overflow: hidden;
+    margin: 0 -24px;
+    padding: 0 24px;
+  }
+
+  :host ::ng-deep .ant-tree li {
+    padding: 4px 0 0 0;
+  }
+
+  .custom-node {
+    cursor: pointer;
+    line-height: 24px;
+    margin-left: 4px;
+    display: inline-block;
+    margin: 0 -1000px;
+    padding: 0 1000px;
+  }
+
+  .active {
+    background: #1890ff;
+    color: #fff;
+  }
+
+  .file-name,
+  .folder-name {
+    margin-left: 4px;
+  }
+
+  .file-desc,
+  .folder-desc {
+    padding: 0 8px;
+    display: inline-block;
+    background: #87ceff;
+    color: #ffffff;
+    position: relative;
+    left: 12px;
+  }

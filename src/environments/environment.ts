@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlPrefix:"http://127.0.0.1/",
+  urlPrefix:"http://localhost:8012/",
   hmr: true,
 };
 

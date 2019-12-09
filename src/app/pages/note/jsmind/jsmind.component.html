@@ -1,4 +1,5 @@
 
+<!--
 <input type="file" onchange="loadFile(this);"/>
 <button onclick="saveNodeTree();">保存</button>
 <button (click)="reset();">重置</button>
@@ -6,6 +7,7 @@
 
 <button *ngIf="!isPreview" (click)="previewChange()">预览</button>
 <button *ngIf="isPreview" (click)="previewChange()">退出预览</button>
+-->
 <div id="jsmind_container" oncontextmenu='return false'> </div>
 
 <div id="menu" class="skin">
@@ -38,5 +40,6 @@
 
 
   <nz-modal [(nzVisible)]="isShowText" nzTitle="备注" (nzOnCancel)="isShowText=false" (nzOnOk)="updateText()">
-	<mkedit></mkedit>		
+	  <textarea [(ngModel)]="text" style="height:30vh;width:100%"></textarea>
+		<!--<mark-down [(text)]="text" [height]="markdownHeight" style="width:100%"></mark-down>-->
 </nz-modal>

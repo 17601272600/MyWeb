@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NzContextMenuService, NzDropdownMenuComponent, NzModalService, NzMessageService } from 'ng-zorro-antd';
+
 declare var jsMind:any;
 @Component({
   selector: 'app-jsmind',
   templateUrl: './jsmind.component.html',
   styleUrls: ['./jsmind.component.css']
 })
-export class JsmindComponent implements OnInit {
+export class JsmindComponent implements OnInit,OnDestroy{
+  ngOnDestroy(): void {
+    window.confirm("是否保存该思维导图");
+  }
   jm:any;
   isAddLink: boolean;
-  url: any;
+  url: any="";
   isShowText: boolean;
-  text: any;
+  text: any="";
   isPreview:boolean;
+  markdownHeight:string="30vh";
   constructor(private message: NzMessageService,private modalService: NzModalService) { 
     //this.contextMenucontextMenu();
   }
@@ -21,7 +26,6 @@ export class JsmindComponent implements OnInit {
   set selectNode(selectNode) { this.jm.set_selected_node()==selectNode; }
   ngOnInit() {
     this.loadJsMind();
-
   }
 
   loadJsMind(){
@@ -33,18 +37,10 @@ export class JsmindComponent implements OnInit {
       },
       format:'node_array',
       data:[
-          {"id":"root", "isroot":true, "topic":"jsMind"},
+          {"id":"root", "isroot":true, "topic":"root",text:"1234"},
 
-          {"id":"sub1", "parentid":"root", "topic":"sub1"},
-          {"id":"sub11", "parentid":"sub1", "topic":"sub11"},
-          {"id":"sub12", "parentid":"sub1", "topic":"sub12"},
-          {"id":"sub13", "parentid":"sub1", "topic":"sub13"},
-
-          {"id":"sub2", "parentid":"root", "topic":"sub2"},
-          {"id":"sub21", "parentid":"sub2", "topic":"sub21"},
-          {"id":"sub22", "parentid":"sub2", "topic":"sub22"},
-
-          {"id":"sub3", "parentid":"root", "topic":"sub3"},
+          {"id":"sub1", "parentid":"root", "topic":"sub1",text:''},
+          {"id":"sub11", "parentid":"sub1", "topic":"sub11",text:"sub1 text"},
       ]
   };
 
@@ -118,8 +114,10 @@ openText(){
     this.message.warning(`请选择节点`);
     return;
   }
-  this.isShowText=true;
+  
+  
   this.text=this.selectNode.data.text;
+  this.isShowText=true;
 }
 previewChange(){
   this.jm.hideMenu();
@@ -155,6 +153,6 @@ this.jm.data.load(mind)
 updateText(){
   this.isShowText=false;
   this.jm.get_selected_node().data.text=this.text;
-
+  this.text=this.selectNode.data.text;
 }
 }

@@ -35,9 +35,14 @@
             "styles": [
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less",
-              "src/assets/css/jsmind.css"
+              //"src/assets/editor.md/css/editormd.css"
             ],
-            "scripts": ["./src//assets/js/jsmind/jsmind.js"]
+            "scripts": ["./src/assets/js/jsmind/jsmind.js",
+              "node_modules/jquery/dist/jquery.js",//jquery路径
+                "src/assets/editor.md/editormd.min.js",//editormd js路径
+                "src/assets/editor.md/lib/marked.min.js",//解析markdown用到的js路径
+                "src/assets/editor.md/lib/prettify.min.js"//解析markdown用到的js路径  
+            ]
           },
           "configurations": {
             "production": {
