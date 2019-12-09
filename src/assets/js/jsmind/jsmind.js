@@ -1306,25 +1306,23 @@
 		showMenu:function(){
             this._menu=document.getElementById(this.options.menu);
 			if(this._menu){
+                let _menu=this._menu;
 				var drawing = document.getElementById(this.options.container);//设置菜单点击区域;
-				var evt = window.event || arguments[0];
-				var rightedge = drawing.clientWidth-evt.clientX;
-				var bottomedge = drawing.clientHeight-evt.clientY;
-				if (rightedge < this._menu.offsetWidth)               
-					this._menu.style.left = drawing.scrollLeft + evt.clientX - this._menu.offsetWidth + "px";            
-				else
-					this._menu.style.left = drawing.scrollLeft + evt.clientX + "px";
-				if (bottomedge < this._menu.offsetHeight)
-					this._menu.style.top = drawing.scrollTop + evt.clientY - this._menu.offsetHeight + "px";
-				else
-					this._menu.style.top = drawing.scrollTop + evt.clientY + "px";
-					this._menu.style.visibility = "visible";   
+                var ev = window.event || arguments[0];
+                //记录当前的坐标(x轴和y轴)
+                var x = ev.clientX;
+                var y = ev.clientY;
+
+                _menu.style.display = 'block';//右键点击时显示菜单框
+                _menu.style.left = x + 'px';
+                _menu.style.top = y + 'px';
+			  
 				}
 			    
 		},
 		hideMenu:function(){
 			if(this._menu){	
-				this._menu.style.visibility = 'hidden';
+                this._menu.style.display = 'none';
 			}
 		},
         get_meta: function () {
