@@ -31,10 +31,8 @@
       </div>
     </div>
     <div style="width: 80%;height:100%" *ngIf="isType==1">
-      <div><span>思维脑图:{{typeTarget.name}}</span></div>
-      <div><br>
         <app-jsmind></app-jsmind>
-      </div>
+ 
     </div>
     <div style="width: 80%;height:100%" *ngIf="isType==2">
       <div><label>笔记:</label>{{nodeTarget.name}} <button (click)="saveTextData()">保存</button>
